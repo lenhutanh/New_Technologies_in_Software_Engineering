@@ -1,0 +1,52 @@
+<link rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<form action="/post-crud" method="post">
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputPassword4">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputFirstname4">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputLastname4">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="inputCity">Phone Number</label>
+            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputState">Gender</label>
+            <select id="gender" name="gender" class="form-control">
+                <option selected value="1">Male</option>
+                <option value="0">Female</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputRole">Role</label>
+            <select id="roleId" name="roleId" class="form-control">
+                <option selected value="1">Admin</option>
+                <option value="2">Customer</option>
+                <option value="3">Patient</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-primary w-25">Add</button>
+    </div>
+</form>
