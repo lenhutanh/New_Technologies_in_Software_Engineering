@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",             // 👈 đổi sang CommonJS để chạy dễ hơn với Node hiện tại
+    "lib": ["esnext"],
+    "types": ["node", "express"],
+
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,  // 👈 giúp import sequelize, express dễ hơn
+    "resolveJsonModule": true,             // 👈 import file .json nếu cần
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
