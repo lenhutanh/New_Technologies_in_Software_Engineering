@@ -1,56 +1,56 @@
-import { QueryInterface, DataTypes } from "sequelize";
+import { QueryInterface, DataTypes } from 'sequelize';
 
 export default {
   async up(queryInterface: QueryInterface): Promise<void> {
-    await queryInterface.createTable("users", {
+    await queryInterface.createTable('users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER
       },
       email: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       password: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       firstName: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       lastName: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       address: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       phoneNumber: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       gender: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.BOOLEAN
       },
       image: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       roleId: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       positionId: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
       createdAt: {
         allowNull: false,
-        type: DataTypes.DATE,
+        type: DataTypes.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: DataTypes.DATE,
-      },
+        type: DataTypes.DATE
+      }
     });
   },
 
   async down(queryInterface: QueryInterface): Promise<void> {
-    await queryInterface.dropTable("users");
-  },
+    await queryInterface.dropTable('users');
+  }
 };

@@ -2,23 +2,20 @@
 
 import fs from 'fs';
 import path from 'path';
-import { Sequelize, DataTypes, Model, Dialect } from 'sequelize';
+import { Sequelize, DataTypes } from 'sequelize';
 import process from 'process';
 
-// Lấy tên file hiện tại
 const basename: string = path.basename(__filename);
 const env: string = process.env.NODE_ENV || 'development';
-
-// Import config
-// Cần chắc chắn rằng bạn đã có file config đúng kiểu TypeScript (hoặc dùng JSON như bạn đang làm)
 const config = require(path.join(__dirname, '/../config/config.json'))[env];
 
-// Khởi tạo biến db dưới dạng object có thể chứa model và Sequelize instance
-const db: {
+interface DB {
   [key: string]: any;
   sequelize?: Sequelize;
   Sequelize?: typeof Sequelize;
-} = {};
+}
+
+const db: DB = {};
 
 let sequelize: Sequelize;
 
@@ -28,30 +25,30 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-// Đọc các file model trong thư mục hiện tại
+// Đọc tất cả các file trong models (trừ index.ts)
 fs.readdirSync(__dirname)
   .filter((file: string) => {
     return (
       file.indexOf('.') !== 0 &&
       file !== basename &&
-      file.slice(-3) === '.js' &&
+      (file.endsWith('.ts') || file.endsWith('.js')) &&
       file.indexOf('.test.js') === -1
     );
   })
   .forEach((file: string) => {
-    const model = require(path.join(__dirname, file))(sequelize, DataTypes);
+    const modelModule = require(path.join(__dirname, file));
+    const model = modelModule.default(sequelize, DataTypes); // <-- Quan trọng
     db[model.name] = model;
   });
 
-// Gọi hàm associate nếu có
+// Thiết lập associations nếu có
 Object.keys(db).forEach((modelName: string) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
 });
 
-// Gán Sequelize instance vào object db
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-export = db;
+export default db;
