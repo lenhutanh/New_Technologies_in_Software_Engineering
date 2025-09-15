@@ -2,6 +2,7 @@ require("dotenv").config()
 const mongoose = require('mongoose')
 const Book = require('../models/book')
 const Category = require('../models/category')
+const { indexBook, indexCategory } = require("../services/elasticService")
 
 // Kết nối MongoDB
 mongoose.connect(process.env.MONGODB_URL, {
@@ -21,6 +22,11 @@ async function seed() {
       { name: 'Văn học' },
       { name: 'Khoa học' }
     ])
+
+    // Index categories vào Elasticsearch
+    for (const category of categories) {
+      await indexCategory(category)
+    }
 
     // Tạo books
     const books = [
@@ -186,8 +192,10 @@ async function seed() {
       coverImage: 'https://picsum.photos/200/300?random=22'
     }
   ]
-    await Book.insertMany(books)
-
+    const insertedBooks = await Book.insertMany(books);
+    for (const book of insertedBooks) {
+      await indexBook(book)
+    }
     console.log('✅ Seed data thành công!')
   } catch (err) {
     console.error(err)
