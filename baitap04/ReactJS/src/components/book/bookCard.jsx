@@ -6,6 +6,7 @@ const BookCard = ({ book }) => {
         alt={book.title}
         className="w-full h-48 object-cover rounded-xl mb-3"
       />
+      <p className="text-sm text-gray-500 mb-2">{book.categoryId.name ? book.categoryId.name : book.categoryName}</p>
       <h3 className="text-lg font-semibold text-gray-800 mb-1 line-clamp-2">
         {book.title}
       </h3>

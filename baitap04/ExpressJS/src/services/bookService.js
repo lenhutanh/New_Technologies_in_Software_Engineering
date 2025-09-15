@@ -7,6 +7,7 @@ const getBooksService = async (categoryId, page = 1, limit = 10) => {
   if (categoryId) filter.categoryId = categoryId;
 
   const books = await Book.find(filter)
+    .populate('categoryId', 'name')
     .skip((page - 1) * limit)
     .limit(Number(limit))
     .sort({ createdAt: -1 });
@@ -32,12 +33,11 @@ const searchBooksService = async ({ q, categories = [], minPrice, maxPrice, page
 
   if (q) {
     must.push({
-      match: {
-        title: {
-          query: q,
-          fuzziness: 'AUTO',
-        },
-      },
+      multi_match: {
+        query: q,
+        fields: ["title^2", "author"], // title có trọng số cao hơn
+        fuzziness: "AUTO"
+      }
     });
   }
 
