@@ -31,7 +31,7 @@ const SidebarFilter = ({ onFilter }) => {
   };
 
   return (
-    <div className="w-64 p-4 border-r border-gray-200">
+    <div className="w-64">
       <h3 className="font-semibold mb-3">Filter</h3>
 
       {/* Category */}

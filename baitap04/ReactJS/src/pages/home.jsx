@@ -45,14 +45,19 @@ const HomePage = () => {
         icon={<CrownOutlined />}
         title="JSON Web Token (React/Node.JS) - iotstar.vn"
       />
-      <div className="flex">
+      <div className="flex gap-8">
         <SidebarFilter onFilter={(filterData) => {
           setFilters((prev) => ({ ...prev, ...filterData }));
           setPage(1);
         }} />
         <div>
           <SearchBar onSearch={(value) => {
-            setFilters((prev) => ({ ...prev, keyword: value }));
+            setFilters({
+              keyword: value,   // chỉ giữ keyword
+              categories: [],   // reset
+              minPrice: null,   // reset
+              maxPrice: null,   // reset
+            });
             setPage(1);
           }} />
 
